@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport">
+        <title>Notes</title>
+        <link rel="stylesheet" href="notes.css">
+    </head>
+    <body>
+        <div class="container" id="app">
+            <div class="card">
+                <h1 class="title" v-bind:style="{color: (inputValue.length < 50) ? 'green' : 'red'}">{{ title }}</h1>
+                <input v-bind:value="inputValue"
+                       v-bind:placeholder="inputPlaceholder"
+                       v-model="inputValue"
+                       type="text"
+                       v-on:keypress="pressEnter"
+                       />
+                <div v-if="inputValue.length > 50">{{ warning }}</div>
+                <button class="btn btn-add"
+                        v-on:click="addNote">Добавить</button>
+                <hr>
+                <h2 v-if="notes.length === 0">Заметок нет</h2>
+                <ul class="list">
+                    <li class="list-item" v-for="(note,index) in notes">№{{ index + 1 }} {{ toUpperCase(note) }} <button 
+                            class="btn btn-delete"
+                            v-on:click="deleteNote">Удалить</button></li>
+                </ul>
+                <hr>
+                <p>Количество заметок: {{ notes.length }}</p>
+            </div>
+        <script src="https://unpkg.com/vue@next"></script>
+        <script src="notes.js"></script>
+    </body>
+</html>
